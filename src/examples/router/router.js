@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { Router, Route } from "react-router-dom";
 import history from "./history";
-import { createStore } from "rxsm";
+import { createStore } from "../../../dist/rxsm";
 
 const routerInit = {
   currentPath: "/"

@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore } from "./rxsm/rxsm";
+import { useStore } from "../../dist/rxsm";
 import { Input } from "reactstrap";
 
 export const AbstractTextLine = ({ store, valName, setAction }) => () => {

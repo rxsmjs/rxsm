@@ -1,5 +1,3 @@
-import { throwError } from "rxjs";
-
 export const setTextAction = arg => ({
   name: "changeTextLine1",
   func: store => {

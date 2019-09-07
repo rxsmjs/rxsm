@@ -2,7 +2,7 @@ import React from "react";
 
 import { InputGroup, InputGroupAddon, Button } from "reactstrap";
 import { STORE, store_v2 } from "./stores";
-
+import { useStore } from "../../dist/rxsm";
 import {
   setTextAction,
   setTextAction2,
@@ -18,18 +18,24 @@ import { AbstractButton } from "./AbstractButton";
 
 import { HVCenteredLayout } from "./HVCenteredLayout";
 
-// import { useLogger } from "./rxsm/rxsm";
+import { Input } from "reactstrap";
+
 const Line1ClearButton = AbstractButton({
   store: STORE,
   color: "primary",
   action: clearTextLine1
 });
 
-const InputLine1 = AbstractTextLine({
-  store: STORE,
-  valName: "textLine1",
-  setAction: setTextAction
-});
+const InputLine1 = () => {
+  const [textValue] = useStore(STORE, "textLine1");
+  return (
+    <Input
+      value={textValue}
+      onChange={e => STORE.dispatch(setTextAction(e.target.value))}
+    />
+  );
+};
+
 const InputLine2 = AbstractTextLine({
   store: STORE,
   valName: "textLine2",

@@ -1,2 +1,5 @@
 dist
 node_modules
+src/examples/node_modules
+src/examples/dist
+src/examples/.cache

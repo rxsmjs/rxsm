@@ -1,5 +1,5 @@
-import { createStore } from "./rxsm/rxsm";
-import { createStore as createStore_v2 } from "./rxsm/experemental";
+import { createStore } from "../../dist/rxsm";
+import { createStore as createStore_v2 } from "../../dist/experemental";
 
 const init = {
   textLine1: "init text1",
