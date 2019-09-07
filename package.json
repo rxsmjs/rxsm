@@ -1,0 +1,30 @@
+{
+  "name": "rxsm",
+  "version": "0.1.0-beta.0",
+  "description": "redux-like state manager for React, based on RxJS",
+  "main": "rxsm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryazantseff/rxsm.git"
+  },
+  "author": {
+    "name": "Max Ryazantseff",
+    "email": "maxim.ryazancev@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "core-js": "^2.6.9",
+    "react": "^16.8.0",
+    "rxjs": "^6.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "@babel/preset-env": "^7.6.0"
+  },
+  "scripts": {
+    "build": "babel src/rxjs --out-dir dist",
+    "prepublishOnly": "npm run bild"
+  }
+}
