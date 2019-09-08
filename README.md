@@ -19,4 +19,4 @@ The main goal of this library is to keep **Redux** dev-experience and decrease
 the amount of unnecessary code in state management as well as reduce your bundle size.
 
 ### Installation
-npm i -S rxsm
+    npm i -S rxsm
