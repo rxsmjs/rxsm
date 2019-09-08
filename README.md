@@ -18,12 +18,12 @@ to work with async actions and side-effects without middlewares and extra code.
 The main goal of this library is to keep **Redux** dev-experience and decrease
 the amount of unnecessary code in state management as well as reduce your bundle size.
 
-## Installation
+## Installation:
     npm i -S rxsm
 
-## Basic usage:
+## Usage:
 
-### rxStore:
+### rxStore
 
 A store is a place where all of the state data is located.
 You may not bound yourself with the only one store *(despite Redux)*, but use as many separated storages as you need *(for instance, when you use React components and want to isolate your components logic in  individual files)*:
@@ -81,7 +81,7 @@ In a nutshell:
 }
 ```
 
-Let's take a look at a particular case in the first example:
+Let's take a look at the particular case in the first example:
 
 ```
 rxStore:
@@ -112,13 +112,64 @@ getState returns common JS object with full state of the store
 import {rxStore} from 'store'
 
 const currentState = rxStore.getState()
+```
+<details><summary> curretState:</summary>
+<p>
 
-// curretState:
-// {
-//     textLine: "init text1",
-//     numericValue: 1,
-//     array: ['one', 'two', 'three']
-// }
+```js
+ {
+     textLine: "init text1",
+     numericValue: 1,
+     array: ['one', 'two', 'three']
+ }
 ```
 
+</p>
+</details>
+
+
 ### actionObject:
+An actionObject is a common JS object, that determines how the store should be changed. It's based on the current store state and *(optional)* additional data.
+
+#### actionObject structure:
+```js
+import {rxStore} from 'store'
+
+const action = {
+    name: "increment",
+    func: store => {
+        numericValue: store.numericValue + 1
+    } 
+}
+``` 
+<details><summary> curretState before dispatch:</summary>
+<p>
+
+```js
+ {
+     textLine: "init text1",
+     numericValue: 1,
+     array: ['one', 'two', 'three']
+ }
+```
+
+</p>
+</details>
+
+```js
+rxStore.dispatch(action)
+```
+
+<details><summary> curretState after dispatch:</summary>
+<p>
+
+```js
+ {
+     textLine: "init text1",
+     numericValue: 2,
+     array: ['one', 'two', 'three']
+ }
+```
+
+</p>
+</details>
