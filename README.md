@@ -1,4 +1,7 @@
 # RxSM - Reactive State Management
+
+[![npm (tag)](https://img.shields.io/npm/v/rxsm/latest?style=for-the-badge)](https://www.npmjs.com/package/rxsm)
+
 Redux-like state manager, based on the **RxJS** methods in the core.
 
 Widely spread **Redux**, in spite of its advantages
@@ -14,3 +17,6 @@ to work with async actions and side-effects without middlewares and extra code.
 
 The main goal of this library is to keep **Redux** dev-experience and decrease
 the amount of unnecessary code in state management as well as reduce your bundle size.
+
+### Installation
+npm i -S rxsm
