@@ -1,3 +1,6 @@
+// import "core-js"
+import "regenerator-runtime/runtime"
+
 import React, { useLayoutEffect, useState } from "react";
 import { defer, Subject, BehaviorSubject, combineLatest } from "rxjs";
 import { mergeMap, map, withLatestFrom } from "rxjs/operators";
