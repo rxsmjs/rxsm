@@ -9,7 +9,7 @@ Widely spread **Redux**, in spite of its advantages
 has a couple of downsides:
 * Lots of writing stuff *(stores, actions, reducers, middlewares, tons of glue-code)*
 * As a consequence - big bundle size
-* One big storage *(Someone could believe it's an advantage! Hah, Let the holy war begin!)*
+* Just **ONE BIG** storage *(Someone could believe it's an advantage! Hah, Let the holy war begin!)*
 
 On the other hand, we have **RxJS** with its atomical way to store data in **BehaviorSubjects**
 and a huge amount of asynchronous methods to work with events, which gives possibilities
@@ -31,6 +31,8 @@ You may not bound yourself with the only one store *(despite Redux)*, but use as
 #### Creating store:
 
 ```javascript
+//store.js:
+
 import { createStore } from "rxsm"
 
 const init = {
@@ -44,6 +46,8 @@ export const rxStore = createStore(init)
  And with multiple stores:
 
  ```javascript
+//multiple_stores.js
+
 import { createStore } from "rxsm"
 
 const init1 = {
@@ -89,3 +93,32 @@ rxStore:
     getState: function()
 }
 ```
+
+#### Store methods:
+* #### dispatch(actionObject)
+
+dispatch method initiates changes in the store according actionObject:
+
+```javascript
+import {rxStore} from 'store'
+
+rxStore.dispatch(actionObject)
+```
+* #### getState()
+
+getState returns common JS object with full state of the store
+
+```javascript
+import {rxStore} from 'store'
+
+const currentState = rxStore.getState()
+
+// curretState:
+// {
+//     textLine: "init text1",
+//     numericValue: 1,
+//     array: ['one', 'two', 'three']
+// }
+```
+
+### actionObject:
