@@ -132,6 +132,15 @@ const currentState = rxStore.getState()
 An actionObject is a common JS object, that determines how the store should be changed. It's based on the current store state and *(optional)* additional data.
 
 #### actionObject structure:
+```
+{
+    name: String, //name of the action
+    func: currentState => {stateChanges} //function with the currentState as an argument and returning
+                                         //JS object that contains only changes in state  
+}
+```
+
+#### actionObject usage:
 ```js
 import {rxStore} from 'store'
 
@@ -167,6 +176,51 @@ rxStore.dispatch(action)
  {
      textLine: "init text1",
      numericValue: 2,
+     array: ['one', 'two', 'three']
+ }
+```
+
+</p>
+</details>
+
+##### The same, but with additional data:
+
+```js
+import {rxStore} from 'store'
+
+const actionWithExternalData = externalData =>
+{
+    name: "increment",
+    func: store => {
+        numericValue: store.numericValue + externalData
+    } 
+}
+``` 
+<details><summary> curretState before dispatch:</summary>
+<p>
+
+```js
+ {
+     textLine: "init text1",
+     numericValue: 1,
+     array: ['one', 'two', 'three']
+ }
+```
+
+</p>
+</details>
+
+```js
+rxStore.dispatch(actionWithExternalData(5))
+```
+
+<details><summary> curretState after dispatch:</summary>
+<p>
+
+```js
+ {
+     textLine: "init text1",
+     numericValue: 6,
      array: ['one', 'two', 'three']
  }
 ```
