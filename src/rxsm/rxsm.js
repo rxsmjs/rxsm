@@ -76,5 +76,5 @@ export const useStore = (storeObj, storeName) => {
       subscribtion.unsubscribe();
     };
   }, []);
-  return [state];
+  return [state, i => storeObj[storeName].next(i)];
 };

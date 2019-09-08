@@ -18,5 +18,74 @@ to work with async actions and side-effects without middlewares and extra code.
 The main goal of this library is to keep **Redux** dev-experience and decrease
 the amount of unnecessary code in state management as well as reduce your bundle size.
 
-### Installation
+## Installation
     npm i -S rxsm
+
+## Basic usage:
+
+### rxStore:
+
+A store is a place where all of the state data is located.
+You may not bound yourself with the only one store *(despite Redux)*, but use as many separated storages as you need *(for instance, when you use React components and want to isolate your components logic in  individual files)*:
+
+#### Creating store:
+
+```javascript
+import { createStore } from "rxsm"
+
+const init = {
+  textLine: "init text1",
+  numericValue: 1,
+  array: ['one', 'two', 'three']
+}
+
+export const rxStore = createStore(init)
+```
+ And with multiple stores:
+
+ ```javascript
+import { createStore } from "rxsm"
+
+const init1 = {
+    textLine: "init text1",
+}
+
+const init2 = {
+    numericValue: 1,
+}
+
+const init3 = {
+    array: ['one', 'two', 'three']
+}
+
+export const rxStore1 = createStore(init1)
+export const rxStore2 = createStore(init1)
+export const rxStore3 = createStore(init1)
+ ```
+
+#### Store structure:
+
+In a nutshell:
+
+```
+{
+    storeKey_0: EnhancedRxBehaviorSubject_1,
+    ...
+    storeKey_n: EnhancedRxBehaviorSubject_n,
+    dispatch: function(actionObject),
+    getState: function()  //return state js-object {...}
+}
+```
+
+Let's take a look at a particular case in the first example:
+
+```
+rxStore:
+{
+    textLine: EnhancedRxBehaviorSubject("init text1"),
+    numericValue: EnhancedRxBehaviorSubject(1),
+    array: EnhancedRxBehaviorSubject(['one', 'two', 'three']),
+    dispatch: function(actionObject),
+    getState: function()
+}
+```
