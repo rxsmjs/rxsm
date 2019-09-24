@@ -372,3 +372,11 @@ export const UseStoreExample = () => {
 
 ```
 
+## Products that use RxSM
+
+[![Alt text](https://callaba.io/img/logo-black.svg)](https://callaba.io/)
+
+
+## License
+
+[MIT](https://github.com/rxsmjs/rxsm/blob/master/LICENSE.md)
