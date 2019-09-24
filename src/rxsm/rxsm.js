@@ -10,10 +10,14 @@ export const createStore = initObj => {
     Object.entries(initObj).map(([key, value]) => {
       const bs = new BehaviorSubject(value);
       bs.sides = {};
+      // Method that subscribes function for launching on bs changes
+      // by the action with a certain name 
       bs.sideEffectSubscribe = (actionName, func) => {
         bs.sides[actionName] = func;
         return () => (bs.sides[actionName] = undefined);
       };
+      // Internal method to set new value in bs, and fire up subscribed
+      // side effects
       bs.setData = (value, actionName) => {
         bs.next(value);
         bs.sides[actionName] !== undefined && bs.sides[actionName](value);

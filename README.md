@@ -21,14 +21,14 @@ the amount of unnecessary code in state management as well as reduce your bundle
 ## Installation:
     npm i -S rxsm
 
-## Usage:
+## Basic usage:
 
-### rxStore
+### rxStore:
 
 A store is a place where all of the state data is located.
 You may not bound yourself with the only one store *(despite Redux)*, but use as many separated storages as you need *(for instance, when you use React components and want to isolate your components logic in  individual files)*:
 
-#### Creating store:
+### Creating store:
 
 ```javascript
 //store.js:
@@ -67,7 +67,7 @@ export const rxStore2 = createStore(init1)
 export const rxStore3 = createStore(init1)
  ```
 
-#### Store structure:
+### Store structure:
 
 In a nutshell:
 
@@ -94,7 +94,7 @@ rxStore:
 }
 ```
 
-#### Store methods:
+### Store methods:
 * #### dispatch(actionObject)
 
 dispatch method initiates changes in the store according actionObject:
@@ -183,7 +183,7 @@ rxStore.dispatch(action)
 </p>
 </details>
 
-##### The same, but with additional data:
+#### The same, but with additional data:
 
 ```js
 import {rxStore} from 'store'
@@ -227,3 +227,148 @@ rxStore.dispatch(actionWithExternalData(5))
 
 </p>
 </details>
+
+#### actionObject with async function:
+
+```js
+const AsyncAction = {
+  name: "Async Action",
+  func: async store => {
+    try {
+      const asyncResult = await axios('https://getdataarray');
+      return {
+          array: asyncResult.data //map result
+      };
+    } catch (e) {
+      console.error(e.message);
+      return {}
+    }
+  }
+};
+
+```
+
+### EnhancedRxBehaviorSubject:
+
+Basically, it's common [RxJS BehaviourSubject](https://www.learnrxjs.io/subjects/behaviorsubject.html) with additional method sideEffectSubscribe(). So far as it's part of the RxJS, we can use in-built subscribe() method.
+#### subscribe(func):
+Method subscribes func for launching on every change of the BehaviorSubject 
+
+<details><summary> curretState before dispatch:</summary>
+<p>
+
+```js
+ {
+     textLine: "init text1",
+     numericValue: 1,
+     array: ['one', 'two', 'three']
+ }
+```
+
+</p>
+</details>
+
+ ```js
+import {rxStore} from 'store'
+const inc = {
+    name: "increment",
+    func: store => {
+        numericValue: store.numericValue + 1
+    } 
+}
+const dec = {
+    name: "decrement",
+    func: store => {
+        numericValue: store.numericValue - 1
+    } 
+}
+rxStore.numericValue.subscribe(val => console.log(`Value: ${val}`))
+rxStore.dispatch(inc) 
+rxStore.dispatch(dec)
+ ```
+
+ <details><summary> Console output:</summary>
+<p>
+
+```
+Value: 2
+Value: 1
+```
+</p>
+</details>
+
+#### sideEffectSubscribe(actionName, func):
+Method subscribes func for launching on BehaviorSubject's changes by the action with a certain actionName.
+<details><summary> curretState before dispatch:</summary>
+<p>
+
+```js
+ {
+     textLine: "init text1",
+     numericValue: 1,
+     array: ['one', 'two', 'three']
+ }
+```
+
+</p>
+</details>
+
+ ```js
+import {rxStore} from 'store'
+const inc = {
+    name: "increment",
+    func: store => {
+        numericValue: store.numericValue + 1
+    } 
+}
+const dec = {
+    name: "decrement",
+    func: store => {
+        numericValue: store.numericValue - 1
+    } 
+}
+rxStore.numericValue.sideEffectSubscribe('increment', val => console.log(`Value: ${val}`))
+rxStore.dispatch(inc) 
+rxStore.dispatch(dec)
+ ```
+
+ <details><summary> Console output:</summary>
+<p>
+
+```
+Value: 2
+```
+</p>
+</details>
+
+## Usage with React:
+
+Use custom React hook ```useStore``` from ```rxsm``` to get access to the store values.
+For changing values in the store use actions and store's dispatch method.
+
+```js
+import {useStore} from 'rxsm'
+import {rxStore} from 'store'
+
+const changeText = newVal => ({
+  name: "changeText",
+  func: store => ({
+    textLine: newVal
+  })
+});
+
+export const UseStoreExample = () => {
+  const [textLine] = useStore(store, "textLine");
+  return (
+    <React.Fragment>
+      <h5>{textLine}</h5>
+      <Input
+        value={textLine}
+        onChange={e => rxStore.dispatch(changeText(e.target.value))}
+      />
+    </React.Fragment>
+  );
+};
+
+```
+
