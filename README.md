@@ -97,7 +97,7 @@ rxStore:
 ### Store methods:
 * #### dispatch(actionObject)
 
-dispatch method initiates changes in the store according actionObject:
+dispatch method initiates changes in the store according to actionObject:
 
 ```javascript
 import {rxStore} from 'store'
@@ -113,7 +113,7 @@ import {rxStore} from 'store'
 
 const currentState = rxStore.getState()
 ```
-<details><summary> curretState:</summary>
+<details><summary> currentState:</summary>
 <p>
 
 ```js
@@ -151,7 +151,7 @@ const action = {
     } 
 }
 ``` 
-<details><summary> curretState before dispatch:</summary>
+<details><summary> currentState before dispatch:</summary>
 <p>
 
 ```js
@@ -169,7 +169,7 @@ const action = {
 rxStore.dispatch(action)
 ```
 
-<details><summary> curretState after dispatch:</summary>
+<details><summary> currentState after dispatch:</summary>
 <p>
 
 ```js
@@ -196,7 +196,7 @@ const actionWithExternalData = externalData =>
     } 
 }
 ``` 
-<details><summary> curretState before dispatch:</summary>
+<details><summary> currentState before dispatch:</summary>
 <p>
 
 ```js
@@ -214,7 +214,7 @@ const actionWithExternalData = externalData =>
 rxStore.dispatch(actionWithExternalData(5))
 ```
 
-<details><summary> curretState after dispatch:</summary>
+<details><summary> currentState after dispatch:</summary>
 <p>
 
 ```js
@@ -254,7 +254,7 @@ Basically, it's common [RxJS BehaviourSubject](https://www.learnrxjs.io/subjects
 #### subscribe(func):
 Method subscribes func for launching on every change of the BehaviorSubject 
 
-<details><summary> curretState before dispatch:</summary>
+<details><summary> currentState before dispatch:</summary>
 <p>
 
 ```js
@@ -299,7 +299,7 @@ Value: 1
 
 #### sideEffectSubscribe(actionName, func):
 Method subscribes func for launching on BehaviorSubject's changes by the action with a certain actionName.
-<details><summary> curretState before dispatch:</summary>
+<details><summary> currentState before dispatch:</summary>
 <p>
 
 ```js
