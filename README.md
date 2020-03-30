@@ -146,9 +146,9 @@ import {rxStore} from 'store'
 
 const action = {
     name: "increment",
-    func: store => {
+    func: store => ({
         numericValue: store.numericValue + 1
-    } 
+    }) 
 }
 ``` 
 <details><summary> currentState before dispatch:</summary>
@@ -191,9 +191,9 @@ import {rxStore} from 'store'
 const actionWithExternalData = externalData =>
 {
     name: "increment",
-    func: store => {
+    func: store => ({
         numericValue: store.numericValue + externalData
-    } 
+    }) 
 }
 ``` 
 <details><summary> currentState before dispatch:</summary>
@@ -272,15 +272,15 @@ Method subscribes func for launching on every change of the BehaviorSubject
 import {rxStore} from 'store'
 const inc = {
     name: "increment",
-    func: store => {
+    func: store => ({
         numericValue: store.numericValue + 1
-    } 
+    }) 
 }
 const dec = {
     name: "decrement",
-    func: store => {
+    func: store => ({
         numericValue: store.numericValue - 1
-    } 
+    }) 
 }
 rxStore.numericValue.subscribe(val => console.log(`Value: ${val}`))
 rxStore.dispatch(inc) 
@@ -317,15 +317,15 @@ Method subscribes func for launching on BehaviorSubject's changes by the action 
 import {rxStore} from 'store'
 const inc = {
     name: "increment",
-    func: store => {
+    func: store => ({
         numericValue: store.numericValue + 1
-    } 
+    })
 }
 const dec = {
     name: "decrement",
-    func: store => {
+    func: store => ({
         numericValue: store.numericValue - 1
-    } 
+    })
 }
 rxStore.numericValue.sideEffectSubscribe('increment', val => console.log(`Value: ${val}`))
 rxStore.dispatch(inc) 

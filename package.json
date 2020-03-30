@@ -1,6 +1,6 @@
 {
   "name": "rxsm",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0",
   "description": "redux-like state manager for React, based on RxJS",
   "main": "dist/rxsm.js",
   "repository": {
@@ -15,6 +15,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
     "@babel/runtime": "^7.6.0",
+    "babel-plugin-transform-es2017-object-entries": "0.0.5",
     "core-js": "^3.2.1",
     "react": "^16.8.0",
     "rxjs": "^6.5.0"

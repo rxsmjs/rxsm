@@ -5,6 +5,8 @@ import React, { useLayoutEffect, useState } from "react";
 import { defer, Subject, BehaviorSubject, combineLatest } from "rxjs";
 import { mergeMap, map, withLatestFrom } from "rxjs/operators";
 
+
+
 export const createStore = initObj => {
   const Stores = Object.fromEntries(
     Object.entries(initObj).map(([key, value]) => {
@@ -35,28 +37,18 @@ export const createStore = initObj => {
 
   const dispatchPipe$ = new Subject({}).pipe(
     withLatestFrom(currentState$),
-    mergeMap(
-      i => {
-        const action = i[0];
-        const currState = i[1];
-        return defer(async () => action.func(currState));
-      },
-      (outer, internal) => {
-        const action = outer[0];
-        const currState = outer[1];
-        const newState = internal;
-        Object.entries(newState).forEach(newStateField => {
-          const newKey = newStateField[0];
-          const newVal = newStateField[1];
-          currState[newKey] !== undefined && //check that newKey exists in the storage
-          currState[newKey] !== newVal && //check that new value is different from existing one in the storage
-            (() => {
-              Stores[newKey].setData(newVal, action.name); // changing value in the storage
-            })();
-        });
-        return action.name;
-      }
-    )
+    mergeMap(([action, currState]) => 
+          defer(async () => action.func(currState)) ,
+        ([action, currState], newState) => {
+      Object.entries(newState).forEach(([newKey, newVal]) => {
+        currState[newKey] !== undefined && //check that newKey exists in the storage
+        currState[newKey] !== newVal && //check that new value is different from existing one in the storage
+          (() => {
+            Stores[newKey].setData(newVal, action.name); // changing value in the storage
+          })();
+      });
+      return action.name
+    })
   );
 
   dispatchPipe$.subscribe();
