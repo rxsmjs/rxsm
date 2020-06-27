@@ -18,6 +18,8 @@ export const createStore = initObj => {
         bs.sides[actionName] = func;
         return () => (bs.sides[actionName] = undefined);
       };
+      //Check if sideEffect subscription exists
+      bs.hasSideEffectSubscribe = (actionName) => bs.sides[actionName] ? true : false
       // Internal method to set new value in bs, and fire up subscribed
       // side effects
       bs.setData = (value, actionName) => {

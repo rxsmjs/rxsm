@@ -1,6 +1,6 @@
 {
   "name": "rxsm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "redux-like state manager for React, based on RxJS",
   "main": "dist/rxsm.js",
   "repository": {
